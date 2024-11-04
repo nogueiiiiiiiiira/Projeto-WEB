@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Separação de Lixo</title>
+ 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Comic Sans MS";
+
+        }
+
+        .buttonJogar {
+            appearance: none;
+            background-color: #ca0d67;
+            border: 2px solid #1A1A1A;
+            border-radius: 15px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: normal;
+            min-height: 60px;
+            padding: 16px 24px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            width: 600px; 
+            will-change: transform;
+        }
+
+        .buttonJogar:disabled {
+            pointer-events: none;
+        }
+
+        .buttonJogar:hover {
+            box-shadow: rgba(0, 0, 0, 0.75) 0 8px 15px;
+            transform: translateY(-2px);
+            background-color: #eac213;
+
+        }
+
+        .buttonJogar:active {
+            box-shadow: none;
+            transform: translateY(0);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f8ff;
+        }
+
+        #title {
+            font-size: 28px;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            color: #ff69b4;
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px #ff6347, -2px -2px #1e90ff;
+        }
+        
+        .botao {
+            margin-top: 20px; 
+        }
+
+        h1{
+            font-family: "Comic Sans MS";
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">SEPARE O LIXO CORRETAMENTE</h1>
+    <canvas id="gameCanvas" width="600" height="550"></canvas>
+    
+    <div class="botao">
+        <br>
+        <a class="buttonJogar" href="../pages/paginaSlides.html">Voltar</a>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Variáveis de imagens e jogo
+        let backgroundImage = new Image();
+        backgroundImage.src = "/data/fundo.png";
+
+        const numTypes = 5;
+        const colors = ["#0000FF", "#00FF00", "#FFFF00", "#FF0000", "#A52A2A"];
+        let balls = [];
+        let gameCompleted = false;
+
+        const ballImages = [
+            [new Image(), new Image()], // Papel
+            [new Image(), new Image()], // Vidro
+            [new Image(), new Image()], // Plástico
+            [new Image(), new Image()], // Metal
+            [new Image(), new Image()]  // Orgânico
+        ];
+
+        ballImages[0][0].src = "/data/papel1.png";
+        ballImages[0][1].src = "/data/papel2.png";
+        ballImages[1][0].src = "/data/vidro1.png";
+        ballImages[1][1].src = "/data/vidro2.png";
+        ballImages[2][0].src = "/data/plas1.png";
+        ballImages[2][1].src = "/data/plas2.png";
+        ballImages[3][0].src = "/data/lata1.png";
+        ballImages[3][1].src = "/data/lata2.png";
+        ballImages[4][0].src = "/data/org1.png";
+        ballImages[4][1].src = "/data/org2.png";
+
+        function initGame() {
+            gameCompleted = false;
+            const numBalls = Math.floor(Math.random() * 20) + 1;
+            balls = Array.from({ length: numBalls }, (_, i) => ({
+                x: Math.random() * 500 + 50,
+                y: Math.random() * 300 + 250,
+                radius: 25,
+                type: i % numTypes,
+                variation: Math.floor(Math.random() * 2),
+                dragging: false,
+                sorted: false
+            }));
+
+            backgroundImage.onload = () => {
+                drawGame();
+            };
+        }
+
+        function drawScene() {
+            for (let i = 0; i < numTypes; i++) {
+                ctx.fillStyle = colors[i];
+                ctx.fillRect(i * (canvas.width / numTypes), 25, canvas.width / numTypes, 155);
+            }
+        }
+
+        function drawBalls() {
+            balls.forEach(ball => {
+                if (!ball.sorted) {
+                    const img = ballImages[ball.type][ball.variation];
+                    ctx.drawImage(img, ball.x - ball.radius, ball.y - ball.radius, ball.radius * 2, ball.radius * 2);
+                }
+            });
+        }
+
+        function checkBallInCorrectBox(ball) {
+            const boxWidth = canvas.width / numTypes;
+            const correctXStart = ball.type * boxWidth;
+            const correctXEnd = correctXStart + boxWidth;
+
+            if (ball.y > 25 && ball.y < 180 && ball.x > correctXStart && ball.x < correctXEnd) {
+                ball.sorted = true;
+            }
+        }
+
+        function drawGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawScene();
+
+            if (backgroundImage) {
+                ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+            }
+
+            drawBalls();
+            checkGameCompletion();
+        }
+
+        function checkGameCompletion() {
+            if (balls.every(ball => ball.sorted)) {
+                gameCompleted = true;
+                displayCompletionMessage();
+            }
+        }
+
+        function displayCompletionMessage() {
+            ctx.fillStyle = "black";
+            ctx.font = "bold 24px Comic Sans MS";
+            ctx.textAlign = "center";
+            ctx.fillText("Parabéns! Você separou o lixo corretamente!", canvas.width / 2, canvas.height / 2);
+        }
+
+        canvas.addEventListener("mousedown", (e) => {
+            const { offsetX, offsetY } = e;
+            if (gameCompleted) return;
+
+            balls.forEach((ball) => {
+                if (!ball.sorted && Math.hypot(ball.x - offsetX, ball.y - offsetY) < ball.radius) {
+                    ball.dragging = true;
+                }
+            });
+        });
+
+        canvas.addEventListener("mousemove", (e) => {
+            const { offsetX, offsetY } = e;
+            if (gameCompleted) return;
+
+            balls.forEach((ball) => {
+                if (ball.dragging) {
+                    ball.x = offsetX;
+                    ball.y = offsetY;
+                    drawGame();
+                }
+            });
+        });
+
+        canvas.addEventListener("mouseup", () => {
+            balls.forEach((ball) => {
+                if (ball.dragging) {
+                    checkBallInCorrectBox(ball);
+                    ball.dragging = false;
+                }
+            });
+            drawGame();
+        });
+
+        // Inicializa o jogo
+        initGame();
+    </script>
+</body>
+</html>
