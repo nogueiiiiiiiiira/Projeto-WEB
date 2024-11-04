@@ -4,58 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Inicial</title>
-
-    <br>
-    <br>
-    <br>
-    <div class="title">
-        <h1>Recycle Right</h1>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    
-
     <style>
         * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: "Comic Sans MS";
         }
 
-             
-        h1{
-            color: white;
-        }
-
-        body{
-
-        width: 95vw;
-        height: 95vh;
-        background-image: url("/data/menu.png");
-        background-repeat: no-repeat;
-        }
-
-        .title{
-            justify-content: center;
-            align-items: center;
-            margin-bottom: auto;
+        body {
             display: flex;
-            margin-left: 20px;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background-image: url("/data/menu.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            justify-content: center; 
+            align-items: center;
+            position: relative; 
         }
 
-        body, html {
-            height: 100%;
-            justify-content: center;
-            align-items: center;
+        .logo {
+            margin-top: 10px;
         }
 
         .botao {
             display: flex;
-            flex-direction: column; 
-            align-items: center; 
+            flex-direction: column;
+            align-items: center;
+            gap: 10px; 
         }
 
         .buttonJogar {
@@ -76,38 +56,98 @@
             text-decoration: none;
             transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
             user-select: none;
-            -webkit-user-select: none;
             touch-action: manipulation;
             width: 600px; 
-            margin-bottom: 10px;
             will-change: transform;
-        }
-
-        .buttonJogar:disabled {
-            pointer-events: none;
         }
 
         .buttonJogar:hover {
             box-shadow: rgba(0, 0, 0, 0.75) 0 8px 15px;
             transform: translateY(-2px);
             background-color: #eac213;
-        }
-
-        .buttonJogar:active {
-            box-shadow: none;
-            transform: translateY(0);
+            color: black;
         }
 
         a {
             text-decoration: none;
         }
+
+        .image-left {
+            position: absolute;
+            bottom: -10px; 
+            left: 20px;
+            animation: moveUpDown 0.5s infinite alternate;
+        }
+
+        .image-right {
+            position: absolute;
+            bottom: -10px; 
+            right: 20px; 
+            animation: moveUpDown 0.7s infinite alternate;
+        }
+
+        @keyframes moveUpDown {
+            0% {
+                transform: translateY(5);
+            }
+            100% {
+                transform: translateY(-10px); 
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="botao">
-        <a class="buttonJogar" href="/pages/pages/paginaSlides.html">Começar</a>
-        <a class="buttonJogar" href="/pages/pages/instrucoesJogo.html">Instruções</a>
-        <a class="buttonJogar" href="/pages/pages/creditosJogo.html">Créditos</a>
+    <div class="logo">
+        <img src="/data/logo.png" width="400px">
     </div>
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <div class="botao">
+        <a class="buttonJogar" onclick="playSound(event, '/pages/pages/paginaSlides.html')">Começar</a>
+        <a class="buttonJogar" onclick="playSound(event, '/pages/pages/instrucoesJogo.html')">Instruções</a>
+        <a class="buttonJogar" onclick="playSound(event, '/pages/pages/creditosJogo.html')">Créditos</a>
+        <a class="buttonJogar" onclick="playSound(event, '/pages/pages/feedbackJogo.html')">FeedBack</a>
+    </div>
+
+    <iframe src="/pages/pages/audio.html" style="display: none;"></iframe> 
+    <audio id="buttonSound" src="/data/buttonClick.wav"></audio>
+
+    <img class="image-left" src="/data/1.png" width="500" alt="Image 1">
+    <img class="image-right" src="/data/2.png" width="500" alt="Image 2">
+
+    
+    <script>
+        function playSound(event, redirectUrl) {
+            event.preventDefault(); 
+            var audio = document.getElementById("buttonSound");
+            audio.currentTime = 0; 
+            audio.play().then(() => {
+                audio.onended = function() {
+                    window.location.href = redirectUrl;
+                };
+            }).catch(error => {
+                console.error("Erro ao reproduzir o som:", error);
+            });
+        }
+
+        window.onload = function() {
+            initBackgroundMusic();
+            
+            // Verificar o estado das animações
+            const storedAnimationsActive = localStorage.getItem('animationsActive');
+            if (storedAnimationsActive !== null) {
+                animationsActive = storedAnimationsActive === 'true'; // Converter string para booleano
+            }
+            
+            const images = document.querySelectorAll('.image-left, .image-right');
+            images.forEach(image => {
+                image.style.animationPlayState = animationsActive ? 'running' : 'paused';
+            });
+        };
+    </script>
 </body>
 </html>
