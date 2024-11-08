@@ -16,7 +16,7 @@
     
     <div class="botao">
  
-        <a class="buttonJogar" onclick="tocarBotao(event)" href="../pages/paginaSlides.html">Voltar</a>
+        <a class="buttonJogar" onClick="tocarBotao(event, '/pages/pages/paginaSlides.html')">Voltar</a>
     </div>
 
     <iframe src="/pages/pages/audio.html" style="display: none;"></iframe> 
@@ -177,12 +177,14 @@
         drawGame();
     });
 
-    function tocarBotao(event) {
+    function tocarBotao(event, redirectUrl) {
         event.preventDefault(); 
         var audio = document.getElementById("somBotao");
         audio.currentTime = 0; 
         audio.play().then(() => {
-            window.location.href = "../pages/menuInicial.html"
+            audio.onended = function() {
+                window.location.href = redirectUrl;
+            };
         }).catch(error => {
             console.error("Erro ao reproduzir o som:", error);
         });
@@ -190,7 +192,7 @@
 
     // inicializa o jogo
     initGame();
-    
+
 </script>
 
 <style>
@@ -280,7 +282,7 @@
     }
 
     #title {
-        color: #eac213;
+        color: black;
         margin-bottom: 910px;
         text-align: center;
         background-color: rgba(255, 255, 255, 0.5); 
