@@ -5,15 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instruções</title>
 </head>
+
 <body>
+
+    <div class="title">
+    <a>Instruções</a>
+    </div>
 
     <div class="botao">
         <br>
-        <a class="buttonJogar" onclick="playSound(event)" href="../pages/menuInicial.html">Voltar</a>
+        <a class="buttonJogar" onclick="tocarBotao(event)" href="../pages/menuInicial.html">Voltar</a>
     </div>
 
     <iframe src="/pages/pages/audio.html" style="display: none;"></iframe> 
-    <audio id="buttonSound" src="/data/buttonClick.wav"></audio>
+    <audio id="somBotao" src="/data/buttonClick.wav"></audio>
 
 </body>
 
@@ -24,18 +29,32 @@
         padding: 0;
         box-sizing: border-box;
         font-family: "Comic Sans MS";
+        letter-spacing: 2px;
+        
     }
 
-    h1{
-        color: white;
+
+     .title{
+        display: flex;
+        position: absolute;
+        margin-bottom: 915px;
+        background-color: rgba(255, 255, 255, 0.5); 
+        width: 100vw;
+        justify-content: center;
+        padding: 10px 20px;
+        font-size: 25px;
+        color: #eac213; 
+        font-weight: bold;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.75) 0 8px 15px;
+
     }
-    
+
     body{
-
-    width: 100vw;
-    height: 100vh;
-    background-image: url("/data/menu.png");
-    background-repeat: no-repeat;
+        width: 100vw;
+        height: 100vh;
+        background-image: url("/data/menu.png");
+        background-repeat: no-repeat;
     }
 
     .botao {
@@ -45,14 +64,13 @@
         transform: translateX(-50%); 
     }
 
-
     .buttonJogar {
         appearance: none;
         background-color: #ca0d67;
         border: 2px solid #1A1A1A;
         border-radius: 15px;
         box-sizing: border-box;
-        color: #FFFFFF;
+        color: black;
         cursor: pointer;
         display: inline-block;
         font-size: 16px;
@@ -70,31 +88,33 @@
         will-change: transform;
     }
 
-.buttonJogar:disabled {
-pointer-events: none;
-}
+    .buttonJogar:disabled {
+        pointer-events: none;
+    }
 
-.buttonJogar:hover {
-box-shadow: rgba(0, 0, 0, 0.75) 0 8px 15px;
-transform: translateY(-2px);
-background-color: #eac213;
-color: black;
-}
+    .buttonJogar:hover {
+        box-shadow: rgba(0, 0, 0, 0.75) 0 8px 15px;
+        transform: translateY(-2px);
+        background-color: #eac213;
+        color: black;
+    }
 
-.buttonJogar:active {
-box-shadow: none;
-transform: translateY(0);
-}
+    .buttonJogar:active {
+        box-shadow: none;
+        transform: translateY(0);
+    }
 
-a{
-text-decoration: none;
-}
+    a{
+        text-decoration: none;
+    }
+
 </style>
 
 <script>
-    function playSound(event) {
+
+    function tocarBotao(event) {
         event.preventDefault(); 
-        var audio = document.getElementById("buttonSound");
+        var audio = document.getElementById("somBotao");
         audio.currentTime = 0; 
         audio.play().then(() => {
             window.location.href = "../pages/menuInicial.html"
@@ -102,6 +122,7 @@ text-decoration: none;
             console.error("Erro ao reproduzir o som:", error);
         });
     }
+
 </script>
 
 </html>

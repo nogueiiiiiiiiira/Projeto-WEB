@@ -5,12 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FeedBack</title>
 </head>
+
 <body>
+
+    <div class="title">
+        <a>FeedBack</a>
+    </div>
+
     <div class="inputs">
         <input name="nome" id="nome" class="inputField" type="text" placeholder="Digite seu nome:">
         <input class="inputField" placeholder="Digite o seu email" id="email" name="email">
-        <label class="labelField" for="numberSelect">Selecione sua nota:</label>
-        <select class="selectField" id="numberSelect" name="number">
+        <br>
+        <label class="labelField" for="notaSelecionada">Selecione sua nota ao projeto:</label>
+        <select class="selectField" id="notaSelecionada" name="number">
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -25,23 +32,40 @@
         </select>
     </div>
     <div class="botao">
-        <a class="buttonJogar" onclick="playSound(event, false)">Dar FeedBack</a>
+        <a class="buttonJogar" onclick="handleFeedback(event)">Dar FeedBack</a>
         <br>
         <br>
-        <a class="buttonJogar" onclick="playSound(event, '/pages/pages/menuInicial.html')">Voltar</a>
+        <a class="buttonJogar" onclick="tocarBotao(event, '/pages/pages/menuInicial.html')">Voltar</a>
     </div>
 
     <iframe src="/pages/pages/audio.html" style="display: none;"></iframe> 
-    <audio id="buttonSound" src="/data/buttonClick.wav"></audio>
+    <audio id="somBotao" src="/data/buttonClick.wav"></audio>
 
 </body>
 
 <style>
+
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         font-family: "Comic Sans MS";
+        letter-spacing: 2px;
+    }
+
+    .title{
+        display: flex;
+        position: absolute;
+        margin-bottom: 915px;
+        background-color: rgba(255, 255, 255, 0.5); 
+        width: 100vw;
+        justify-content: center;
+        padding: 10px 20px;
+        font-size: 25px;
+        color: #eac213; 
+        font-weight: bold;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.75) 0 8px 15px;
     }
 
     body {
@@ -95,7 +119,7 @@
         border: 2px solid #1A1A1A;
         border-radius: 15px;
         box-sizing: border-box;
-        color: #FFFFFF;
+        color: black;
         cursor: pointer;
         display: inline-block;
         font-size: 16px;
@@ -132,12 +156,14 @@
     a {
         text-decoration: none;
     }
+
 </style>
 
 <script>
-    function playSound(event, redirectUrl) {
+
+    function tocarBotao(event, redirectUrl) {
         event.preventDefault(); 
-        var audio = document.getElementById("buttonSound");
+        var audio = document.getElementById("somBotao");
         audio.currentTime = 0; 
         audio.play().then(() => {
             audio.onended = function() {
@@ -147,5 +173,33 @@
             console.error("Erro ao reproduzir o som:", error);
         });
     }
+
+    function handleFeedback(event) {
+        event.preventDefault(); 
+
+        var nome = document.getElementById("nome").value;
+        var email = document.getElementById("email").value;
+        var nota = document.getElementById("notaSelecionada").value;
+
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:3000/feedback", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert(xhr.responseText); 
+                
+                document.getElementById("nome").value = '';
+                document.getElementById("email").value = '';
+                document.getElementById("notaSelecionada").value = '0'; 
+            } else {
+                alert("Erro ao enviar feedback: " + xhr.responseText);
+            }
+        };
+
+        xhr.send(JSON.stringify({ nome: nome, email: email, number: nota }));
+    }
+
 </script>
+
 </html>

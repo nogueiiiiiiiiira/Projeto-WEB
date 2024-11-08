@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo de Separação de Lixo</title>
- 
 </head>
+
 <body>
-    <h1 id="title">SEPARE O LIXO CORRETAMENTE</h1>
+    <a id="title">Separe o lixo corretamente</a>
     <canvas id="gameCanvas" width="600" height="550"></canvas>
     <br>
     <br>
@@ -16,18 +16,17 @@
     
     <div class="botao">
  
-        <a class="buttonJogar" onclick="playSound(event)" href="../pages/paginaSlides.html">Voltar</a>
+        <a class="buttonJogar" onclick="tocarBotao(event)" href="../pages/paginaSlides.html">Voltar</a>
     </div>
 
     <iframe src="/pages/pages/audio.html" style="display: none;"></iframe> 
-    <audio id="buttonSound" src="/data/buttonClick.wav"></audio>
+    <audio id="somBotao" src="/data/buttonClick.wav"></audio>
 
 </body>
 <script>
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
 
-    // Variáveis de imagens e jogo
     let backgroundImage = new Image();
     backgroundImage.src = "/data/fundo.png";
 
@@ -141,7 +140,7 @@
         ctx.fillStyle = "black";
         ctx.font = "bold 24px Comic Sans MS";
         ctx.textAlign = "center";
-        ctx.fillText("Parabéns! Você separou o lixo corretamente!", canvas.width / 2, canvas.height / 2);
+        alert("Parabéns! Você separou o lixo corretamente!");
     }
 
     canvas.addEventListener("mousedown", (e) => {
@@ -178,9 +177,9 @@
         drawGame();
     });
 
-    function playSound(event) {
+    function tocarBotao(event) {
         event.preventDefault(); 
-        var audio = document.getElementById("buttonSound");
+        var audio = document.getElementById("somBotao");
         audio.currentTime = 0; 
         audio.play().then(() => {
             window.location.href = "../pages/menuInicial.html"
@@ -189,8 +188,9 @@
         });
     }
 
-    // Inicializa o jogo
+    // inicializa o jogo
     initGame();
+    
 </script>
 
 <style>
@@ -200,6 +200,7 @@
         padding: 0;
         box-sizing: border-box;
         font-family: "Comic Sans MS";
+        letter-spacing: 2px;
     }
 
     body {
@@ -231,7 +232,7 @@
         border: 2px solid #1A1A1A;
         border-radius: 15px;
         box-sizing: border-box;
-        color: #FFFFFF;
+        color: black;
         cursor: pointer;
         display: inline-block;
         font-size: 16px;
@@ -249,25 +250,25 @@
         will-change: transform;
     }
 
-.buttonJogar:disabled {
-pointer-events: none;
-}
+    .buttonJogar:disabled {
+        pointer-events: none;
+    }
 
-.buttonJogar:hover {
-box-shadow: rgba(0, 0, 0, 0.75) 0 8px 15px;
-transform: translateY(-2px);
-background-color: #eac213;
-color: black;
-}
+    .buttonJogar:hover {
+        box-shadow: rgba(0, 0, 0, 0.75) 0 8px 15px;
+        transform: translateY(-2px);
+        background-color: #eac213;
+        color: black;
+    }
 
-.buttonJogar:active {
-box-shadow: none;
-transform: translateY(0);
-}
+    .buttonJogar:active {
+        box-shadow: none;
+        transform: translateY(0);
+    }
 
-a{
-text-decoration: none;
-}
+    a{
+        text-decoration: none;
+    }
 
     body {
         display: flex;
@@ -279,13 +280,18 @@ text-decoration: none;
     }
 
     #title {
-        font-size: 28px;
-        font-family: "Comic Sans MS", cursive, sans-serif;
-        color: #ff69b4;
-        margin-bottom: 20px;
+        color: #eac213;
+        margin-bottom: 910px;
         text-align: center;
-        letter-spacing: 2px;
-        text-shadow: 2px 2px #ff6347, -2px -2px #1e90ff;
+        background-color: rgba(255, 255, 255, 0.5); 
+        width: 100vw;
+        padding: 10px 20px;
+        font-size: 25px;
+        font-weight: bold;
+        border-radius: 10px;
+        position: absolute;
+        box-shadow: rgba(0, 0, 0, 0.75) 0 8px 15px;
+
     }
     
     .botao {
@@ -295,5 +301,7 @@ text-decoration: none;
     h1{
         font-family: "Comic Sans MS";
     }
+
 </style>
+
 </html>
