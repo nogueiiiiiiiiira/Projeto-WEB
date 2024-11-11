@@ -38,7 +38,6 @@
         <a class="buttonJogar" onclick="tocarBotao(event, '/pages/menuInicial.html')">Voltar</a>
     </div>
 
-    <iframe src="/pages/audio.html" style="display: none;"></iframe> 
     <audio id="somBotao" src="/data/buttonClick.wav"></audio>
 
 </body>
@@ -161,26 +160,26 @@
 
 <script>
 
-    function tocarBotao(event, redirectUrl) {
-        event.preventDefault(); 
+    function tocarSomBotao() {
         var audio = document.getElementById("somBotao");
         audio.currentTime = 0; 
-        audio.play().then(() => {
-            audio.onended = function() {
-                window.location.href = redirectUrl;
-            };
-        }).catch(error => {
-            console.error("Erro ao reproduzir o som:", error);
-        });
+        audio.play().catch(error => console.error("Erro ao reproduzir o som:", error));
     }
 
     function handleFeedback(event) {
         event.preventDefault(); 
 
-        var nome = document.getElementById("nome").value;
-        var email = document.getElementById("email").value;
+        var nome = document.getElementById("nome").value.trim();
+        var email = document.getElementById("email").value.trim();
         var nota = document.getElementById("notaSelecionada").value;
 
+        tocarSomBotao();
+
+        if (!nome || !email || !nota) {
+            alert("Por favor, preencha todos os campos antes de enviar.");
+            return; 
+    
+        }
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "http://localhost:3000/feedback", true);
@@ -200,6 +199,20 @@
         xhr.send(JSON.stringify({ nome: nome, email: email, number: nota }));
     }
 
+    function tocarBotao(event, redirectUrl) {
+        event.preventDefault(); 
+        var audio = document.getElementById("somBotao");
+        audio.currentTime = 0; 
+        audio.play().then(() => {
+            audio.onended = function() {
+                window.location.href = redirectUrl;
+            };
+        }).catch(error => {
+            console.error("Erro ao reproduzir o som:", error);
+        });
+    }
+
+    
 </script>
 
 </html>

@@ -12,6 +12,22 @@
         <a>Créditos</a>
     </div>
 
+    <div class="body2">
+        <div class="section">
+            <br>
+            <strong>DESENVOLVIMENTO:</strong><br>
+            <a href="https://github.com" target="_blank" class="credit-link">Edgar Mateus Marcondes de Campos</a><br>
+            <a href="https://github.com/iCescaa" target="_blank" class="credit-link">Felipe Silva Cesca</a><br>
+            <a href="https://github.com/JoaoPicoli" target="_blank" class="credit-link">João Paulo da Silva Picoli</a><br>
+            <a href="https://github.com/nogueiiiiiiiiira" target="_blank" class="credit-link">Karen Cristini Nogueira</a><br>
+            <br><br>
+            <strong>AGRADECIMENTOS:</strong><br>
+            <a>Luiz Antonio Pavão</a><br>
+            <a>Rodrigo da Silva do Nascimento</a><br>
+            <a href="https://www.pucpr.br/" target="_blank" class="credit-link">PUCPR</a>
+        </div>
+    </div>
+
     <div class="botao">
         <br>
         <a class="buttonJogar" onclick="tocarBotao(event, '/pages/menuInicial.html')">Voltar</a>
@@ -22,7 +38,6 @@
 </body>
 
 <style>
-
     * {
         margin: 0;
         padding: 0;
@@ -31,7 +46,7 @@
         letter-spacing: 2px;
     }
 
-    .title{
+    .title {
         display: flex;
         position: absolute;
         margin-bottom: 915px;
@@ -45,12 +60,51 @@
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.75) 0 8px 15px;
     }
- 
-    body{
+
+    body {
         width: 100vw;
         height: 100vh;
         background-image: url("/data/menu.png");
         background-repeat: no-repeat;
+    }
+
+    .body2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 40%;
+        height: 45%;
+        position: absolute;
+        top: 50%; 
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.5); 
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
+
+    .section {
+        margin-bottom: 20px;
+    }
+
+    .section strong {
+        display: block;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .credit-link {
+        color: black;
+        text-decoration: none;
+        margin-bottom: 10px;
+        display: inline-block;
+        transition: color 0.3s ease;
+    }
+
+    .credit-link:hover {
+        color: #ca0d67;
     }
 
     .botao {
@@ -71,21 +125,12 @@
         display: inline-block;
         font-size: 16px;
         font-weight: 600;
-        line-height: normal;
         min-height: 60px;
         padding: 16px 24px;
         text-align: center;
         text-decoration: none;
         transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-        width: 600px; 
-        will-change: transform;
-    }
-
-    .buttonJogar:disabled {
-        pointer-events: none;
+        width: 600px;
     }
 
     .buttonJogar:hover {
@@ -100,39 +145,21 @@
         transform: translateY(0);
     }
 
-    a{
-        text-decoration: none;
-    }
-
-    h1{
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        color: white;
-    }
-
-    .fade {
-        transition: opacity 0.5s ease;
-        opacity: 0;
-    }
-
 </style>
 
 <script>
-
     function tocarBotao(event, redirectUrl) {
-            event.preventDefault(); 
-            var audio = document.getElementById("somBotao");
-            audio.currentTime = 0; 
-            audio.play().then(() => {
-                audio.onended = function() {
-                    window.location.href = redirectUrl;
-                };
-            }).catch(error => {
-                console.error("Erro ao reproduzir o som:", error);
-            });
-        }
-
+        event.preventDefault(); 
+        var audio = document.getElementById("somBotao");
+        audio.currentTime = 0; 
+        audio.play().then(() => {
+            audio.onended = function() {
+                window.location.href = redirectUrl;
+            };
+        }).catch(error => {
+            console.error("Erro ao reproduzir o som:", error);
+        });
+    }
 </script>
 
 </html>
