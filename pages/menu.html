@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Inicial</title>
+    <script src="/data/scripts/menu.js"></script> <!-- link para o JS -->
+    <link rel="stylesheet" href="/data/styles/menu.css"> <!-- link para o CSS -->
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a onclick="tocar_botao(event, '/pages/slides.html')">Começar</a></li>
+            <li><a onclick="tocar_botao(event, '/pages/instrucoes.html')">Instruções</a></li>
+            <li><a onclick="tocar_botao(event, '/pages/creditos.html')">Créditos</a></li>
+            <li><a onclick="tocar_botao(event, '/pages/feedback.html')">FeedBack</a></li>
+        </ul>
+    </nav>
+
+    <div class="logo">
+        <img src="/data/imagens/logo.png" width="350px">
+    </div>
+
+    <audio id="som_botao" src="/data/imagens/buttonClick.wav"></audio>
+
+    <img class="image-left" src="/data/imagens/1.png" width="500" alt="Image 1">
+    <img class="image-right" src="/data/imagens/2.png" width="500" alt="Image 2">
+
+    <div class="carousel" id="carousel">
+        <h1 class="carousel__title">O que nossos usuários dizem</h1>
+        <div class="carousel__viewport" id="carrousel_view">
+        </div>
+        <div class="carousel__navigation">
+            <button class="carousel__prev" onclick="mover_carousel(-1)">&#10094;</button>
+            <button class="carousel__next" onclick="mover_carousel(1)">&#10095;</button>
+        </div>
+    </div>
+</body>
+
+</html>

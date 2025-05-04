@@ -1,0 +1,182 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Comic Sans MS";
+    letter-spacing: 2px;
+
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("/data/imagens/menu.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.logo {
+    margin-top: 100px;
+    position: relative;
+    z-index: 1;
+}
+
+nav {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    box-shadow: rgba(0, 0, 0, 0.75) 0 8px 15px;
+
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    gap: 30px;
+}
+
+li {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #eac213;
+}
+
+.image-left {
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    animation: moveUpDown 0.5s infinite alternate;
+}
+
+.image-right {
+    position: absolute;
+    bottom: -10px;
+    right: 20px;
+    animation: moveUpDown 0.7s infinite alternate;
+}
+
+@keyframes moveUpDown {
+    0% {
+        transform: translateY(5px);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+.carousel {
+    margin-top: 20px;
+    width: 450px;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 10px;
+    z-index: 3;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.carousel__viewport {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    flex-grow: 1;
+    justify-content: flex-start;
+}
+
+.carousel__slide {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+
+.carousel__slide p {
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #333;
+}
+
+.carousel__navigation {
+    position: absolute;
+    top: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.carousel__prev,
+.carousel__next {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.carousel__prev {
+    display: flex;
+    position: absolute;
+    left: 5px;
+}
+
+.carousel__next {
+    display: flex;
+    position: absolute;
+    right: 25px;
+}
+
+.carousel__prev:hover,
+.carousel__next:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+}
+
+.carousel__title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ca0d67;
+}
+
+
+.carousel__next {
+    margin-left: -225px;/
+}

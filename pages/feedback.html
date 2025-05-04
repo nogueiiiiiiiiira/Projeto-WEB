@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeedBack</title>
+    <script src="/data/scripts/feedback.js"></script> <!-- link para o JS -->
+    <link rel="stylesheet" href="/data/styles/feedback.css"> <!-- link para o CSS -->
+</head>
+
+<body>
+
+    <div class="titulo">
+        <a>FeedBack</a>
+    </div>
+
+    <div class="inputs">
+        <input name="nome" id="nome" class="inputField" type="text" placeholder="Digite seu nome:">
+        <input class="inputField" placeholder="Digite o seu email" id="email" name="email">
+        <br>
+        <label class="labelField" for="nota_selecionada">Selecione sua nota ao projeto:</label>
+        <select class="selectField" id="nota_selecionada" name="number">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </div>
+    <div class="botao">
+        <a class="btn_jogar" onclick="feedback(event)">Dar FeedBack</a>
+        <br>
+        <br>
+        <a class="btn_jogar" onclick="tocar_botao(event, '/pages/menu.html')">Voltar</a>
+    </div>
+
+    <audio id="som_botao" src="/data/imagens/buttonClick.wav"></audio>
+
+</body>
+
+</html>

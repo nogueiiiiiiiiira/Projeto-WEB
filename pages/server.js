@@ -16,7 +16,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root', 
     password: '', 
-    database: 'projetoweb'
+    database: 'recycleright'
 });
 
 db.connect(err => {

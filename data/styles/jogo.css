@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Comic Sans MS";
+    letter-spacing: 2px;
+}
+
+body {
+    max-width: 37.5rem;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("/data/imagens/menu.png");
+    background-repeat: no-repeat;
+}
+
+canvas {
+    border-radius: 25px;
+    border: 2px solid #1A1A1A;
+}
+
+.botao {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.btn_jogar {
+    appearance: none;
+    background-color: #ca0d67;
+    border: 2px solid #1A1A1A;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    min-height: 60px;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 600px;
+    will-change: transform;
+}
+
+.btn_jogar:disabled {
+    pointer-events: none;
+}
+
+.btn_jogar:hover {
+    box-shadow: rgba(0, 0, 0, 0.75) 0 8px 15px;
+    transform: translateY(-2px);
+    background-color: #eac213;
+    color: black;
+}
+
+.btn_jogar:active {
+    box-shadow: none;
+    transform: translateY(0);
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f0f8ff;
+}
+
+#title {
+    color: black;
+    margin-bottom: 910px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 100vw;
+    padding: 10px 20px;
+    font-size: 25px;
+    font-weight: bold;
+    border-radius: 10px;
+    position: absolute;
+    box-shadow: rgba(0, 0, 0, 0.75) 0 8px 15px;
+
+}
+
+.botao {
+    margin-top: 20px;
+}
+
+h1 {
+    font-family: "Comic Sans MS";
+}
