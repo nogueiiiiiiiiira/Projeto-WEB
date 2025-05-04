@@ -1,10 +1,10 @@
-# Recycle Right - Projeto WEB
+# ♻️ Recycle Right - Projeto WEB
 
 Este projeto é uma aplicação web chamada "Recycle Right" que tem como objetivo educar e incentivar a correta separação de resíduos através de um jogo interativo. A aplicação é composta por um frontend em HTML, CSS e JavaScript, e um backend em Node.js com Express que se conecta a um banco de dados MySQL para armazenar feedback dos usuários.
 
 ---
 
-## Tecnologias Utilizadas
+## 🚀 Tecnologias Utilizadas
 
 - **Frontend:** HTML5, CSS3, JavaScript
 - **Backend:** Node.js com Express
@@ -13,7 +13,7 @@ Este projeto é uma aplicação web chamada "Recycle Right" que tem como objetiv
 
 ---
 
-## Requisitos para Rodar o Projeto
+## 🧰 Requisitos para Rodar o Projeto
 
 1. **XAMPP:**
    - Instale o XAMPP para ter o servidor Apache e o MySQL rodando localmente.
@@ -46,7 +46,7 @@ Este projeto é uma aplicação web chamada "Recycle Right" que tem como objetiv
      cd pages
      node server.js
      ```
-   - O servidor estará rodando em `http://localhost:3000`.
+   - 🔗 O servidor estará rodando em `http://localhost:3000`.
 
 4. **Frontend:**
    - Abra o arquivo `pages/jogo.html` no navegador para acessar o jogo.
@@ -54,7 +54,7 @@ Este projeto é uma aplicação web chamada "Recycle Right" que tem como objetiv
 
 ---
 
-## Uso
+## 🎮 Uso
 
 - Jogue o jogo de separação de lixo no frontend.
 - Envie feedback através do formulário disponível (se houver).
@@ -62,12 +62,8 @@ Este projeto é uma aplicação web chamada "Recycle Right" que tem como objetiv
 
 ---
 
-## Observações
+## ⚠️ Observações
 
 - Certifique-se de que o MySQL esteja rodando antes de iniciar o backend.
 - Ajuste as configurações de conexão no `server.js` conforme necessário.
 - Para qualquer dúvida ou problema, verifique os logs do servidor Node.js para mensagens de erro.
-
----
-
-Este README foi atualizado para fornecer instruções claras e completas para configurar e rodar o projeto "Recycle Right".
